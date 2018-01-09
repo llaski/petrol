@@ -29,7 +29,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "./bin/petrol run core-tests/VueTestCaseTest.js"
+    "test": "./bin/petrol run core-tests/VueAsyncTestCaseTest.js"
   },
   "dependencies": {
     "babel-core": "^6.21.0",

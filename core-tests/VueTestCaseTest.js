@@ -4,20 +4,20 @@ import ExampleComponent from './fakes/ExampleComponent.vue';
 
 export default class VueTestCaseTest extends TestCase {
 
+    beforeEach() {
+        this.vueTestCase = new VueTestCase
+    }
+
     /** @test */
     it_mounts_an_instance_of_vue_wrapper_from_vue_test_utils() {
-        const vueTestCase = new VueTestCase
-
-        const wrapper = vueTestCase.mount(ExampleComponent)
+        const wrapper = this.vueTestCase.mount(ExampleComponent)
 
         this.assertEquals('VueWrapper', wrapper.constructor.name)
     }
 
     /** @test */
     it_passes_props_correct_to_mounted_component() {
-        const vueTestCase = new VueTestCase
-
-        const wrapper = vueTestCase.mount(ExampleComponent, {
+        const wrapper = this.vueTestCase.mount(ExampleComponent, {
             message: 'This framework is great!'
         })
 
@@ -26,10 +26,9 @@ export default class VueTestCaseTest extends TestCase {
 
     /** @test */
     it_can_find_an_element() {
-        const vueTestCase = new VueTestCase
-        vueTestCase.mount(ExampleComponent)
+        this.vueTestCase.mount(ExampleComponent)
 
-        const element = vueTestCase.find('ul')
+        const element = this.vueTestCase.find('ul')
 
         this.assertEquals('HTMLUListElement', element.constructor.name)
     }
@@ -38,11 +37,10 @@ export default class VueTestCaseTest extends TestCase {
     // Feel like it shoudl throw an error in VueTestCase and allow user to handle
     // /** @test */
     // it_throws_an_error_when_it_can_not_find_an_element() {
-    //     const vueTestCase = new VueTestCase
-    //     vueTestCase.mount(ExampleComponent)
+    //     this.vueTestCase.mount(ExampleComponent)
 
     //     try {
-    //         const element = vueTestCase.find('invalid')
+    //         const element = this.vueTestCase.find('invalid')
     //     } catch (error) {
     //         this.assertEquals('Failed: Element [invalid] was not found', error.message)
     //     }
@@ -50,10 +48,9 @@ export default class VueTestCaseTest extends TestCase {
 
     /** @test */
     it_can_find_all_elements() {
-        const vueTestCase = new VueTestCase
-        vueTestCase.mount(ExampleComponent)
+        this.vueTestCase.mount(ExampleComponent)
 
-        const elements = vueTestCase.findAll('li')
+        const elements = this.vueTestCase.findAll('li')
 
         this.assertEquals('NodeList', elements.constructor.name)
         this.assertCount(3, elements)
@@ -61,9 +58,8 @@ export default class VueTestCaseTest extends TestCase {
 
     /** @test */
     it_can_go_to_the_next_dom_cycle() {
-        const vueTestCase = new VueTestCase
-        const wrapper = vueTestCase.mount(ExampleComponent)
+        const wrapper = this.vueTestCase.mount(ExampleComponent)
 
-        vueTestCase.nextTick()
+        this.vueTestCase.nextTick()
     }
 }

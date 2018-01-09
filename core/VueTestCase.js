@@ -173,7 +173,7 @@ class VueTestCase extends TestCase {
     }
 
     nextTick() {
-        this.mounted.vm.$nextTick();
+        return new Promise(resolve => this.mounted.vm.$nextTick(resolve));
     }
 }
 
